@@ -1,0 +1,26 @@
+{
+	"manifest_version": 2,
+	"name": "cleanyourkeys",
+	"version": "1.21",
+
+	"description":"Tracks keyboard usage to recommend cleanings",
+	
+	"permissions": ["tabs", "storage"],
+
+	"background": {
+		"scripts": ["background/background-counter.js"]
+	},
+	
+	"content_scripts": [
+	  {
+		"matches":["*://*/*"],
+		"js":["content/key-handler.js"]
+	  }
+	],
+	
+	"browser_action": {
+		"default_icon": "browser_action/icon.svg",
+		"default_title": "cleanyourkeys",
+		"default_popup": "browser_action/popup.html"
+	}
+}
