@@ -1,0 +1,20 @@
+{
+    "manifest_version": 2,
+    "name": "Breathe, detour social media",
+    "version": "1.0",
+
+    "description": "Take a questionaire before engaging with social media to discover why you're really there and if you want to continue",
+
+    "permissions": ["tabs", "storage"],
+
+    "background": {
+        "scripts":["background.js"],
+        "persistent": false
+    },
+
+    "browser_action": {
+        "default_title": "breathedetoursocialmedia",
+        "default_popup": "popup/popup.html"
+    }
+
+}
