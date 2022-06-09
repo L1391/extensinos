@@ -12,11 +12,13 @@ document.getElementById("yes-button").addEventListener("click", () => {
 
     index++;
 
+    //end questionaire
     if(index == 4) {
         newData +="|";
         document.getElementById("lower").style.display = "none";
         document.getElementById("closing").style.display = "block";
 
+        //store answers with background script
         browser.runtime.sendMessage(newData);
 
     } else {
@@ -34,12 +36,14 @@ document.getElementById("no-button").addEventListener("click", () => {
     );
 
     index++;
-
+    
+    //end questionaire
     if(index == 4) {
         newData +="|";
         document.getElementById("lower").style.display = "none";
         document.getElementById("closing").style.display = "block";
 
+        //store answers with background script
         browser.runtime.sendMessage(newData);
 
     } else {
