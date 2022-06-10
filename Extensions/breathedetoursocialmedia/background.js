@@ -8,6 +8,7 @@ currentTab.then(gotTab, failTab)
 function gotTab(tabs) {
     console.log("Current tab:" + tabs[0].url);
     currentTab = tabs[0];
+    lastTime = currentTab.lastAccessed;
 } 
 
 function failTab(error) {
@@ -15,25 +16,20 @@ function failTab(error) {
 }
 
 let currentSocial = "";
+let lastTime = 0;
 
 browser.tabs.onUpdated.addListener((tabId, changeInfo, tabInfo) => {
 
     //detour when the new url contains detoured websites
-    if (socials.some((social) => {
+    if (socials.some((social) => changeInfo.url.includes(social)) 
 
-        //only detour when the social media changes per session
-        if (changeInfo.url.includes(social)) {
-            currentSocial = social;
-            return true
-        } else {
-            return false
-        }
-
-    }) && !currentTab.url.includes(currentSocial)) {
+    //only detour when the social media changes per session or if it's been 20 min
+    && (!currentTab.url.includes(currentSocial) || Date.now() - lastTime >= 1200000)) {
 
         //reset currents
         currentTab = tabInfo;
         currentSocial = socials.find((social) => changeInfo.url.includes(social));
+        lastTime = currentTab.lastAccessed
 
         browser.tabs.create({
             active: true,
